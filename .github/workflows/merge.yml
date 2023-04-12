@@ -1,0 +1,25 @@
+name: Merge any release branch to main
+run-name: ${{ github.actor }} has merged pr in the release branch
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - release/**
+      - release
+
+
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Merge release -> develop
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          target_branch: develop
+          message: Merge release into develop
+          github_token: ${{ secrets.GITHUB_TOKEN }}
