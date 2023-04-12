@@ -8,7 +8,9 @@ on:
       - release/**
       - release
 
-
+permissions:
+      contents: write
+      
 jobs:
   if_merged:
     if: github.event.pull_request.merged == true
