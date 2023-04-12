@@ -10,9 +10,9 @@ on:
 
 permissions:
       contents: write
-      
+
 jobs:
-  if_merged:
+  sync-develop:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
