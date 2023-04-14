@@ -1,4 +1,4 @@
-name: Merge any release branch to main
+name: Merge any release branch to develop
 run-name: ${{ github.actor }} has merged pr in the release branch
 on:
   pull_request:
