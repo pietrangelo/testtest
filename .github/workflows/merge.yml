@@ -5,13 +5,13 @@ on:
     types:
       - closed
     branches:
-      - release/*
+      - release/**
 
 permissions:
-      contents: write
-      
+  contents: write
+
 jobs:
-  if_merged:
+  sync-develop:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
@@ -23,4 +23,17 @@ jobs:
           type: now
           target_branch: develop
           message: Merge release into develop
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+  sync-main:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Merge release -> main
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          target_branch: main
+          message: Merge release into main
           github_token: ${{ secrets.GITHUB_TOKEN }}
